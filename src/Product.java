@@ -100,4 +100,13 @@ public class Product implements IProduct{
     public List<IReview> getReviews() {
         return reviews;
     }
+
+    @Override
+    public double getAverageRating() {
+        // Here we just stream through our reviews to get sum of review ratings
+        double totalRatings = reviews.stream()
+                .map(review -> review.getRating())
+                .reduce(0, (total, amount) -> total + amount);
+        return totalRatings/reviews.size();
+    }
 }

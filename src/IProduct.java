@@ -48,6 +48,8 @@ public interface IProduct {
     void addReview(IReview review);
 
     List<IReview> getReviews();
+
+    double getAverageRating();
 }
 
 

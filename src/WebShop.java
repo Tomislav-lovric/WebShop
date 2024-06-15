@@ -65,13 +65,16 @@ public class WebShop {
 
             // Adding reviews to apple product
             apple.addReview(new Review("Tom", "Apple was fresh", 5));
-            apple.addReview(new Review("John", "Apple was fresh", 5));
+            apple.addReview(new Review("John", "Apple was fresh", 4));
 
             // Displaying apple reviews
             for (IReview review : apple.getReviews()) {
                 System.out.println("User: " + review.getUser() + ", Comment: " + review.getComment() +
                         ", Rating: " + review.getRating());
             }
+
+            // Displaying average review rating
+            System.out.println(apple.getAverageRating());
 
             // Creating wishlist
             IWishlist wishlist = new Wishlist(1L, "Tom");
