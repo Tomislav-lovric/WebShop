@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
@@ -43,6 +44,10 @@ public interface IProduct {
     void setDiscount(BigDecimal discount);
 
     BigDecimal getDiscountedPrice();
+
+    void addReview(IReview review);
+
+    List<IReview> getReviews();
 }
 
 

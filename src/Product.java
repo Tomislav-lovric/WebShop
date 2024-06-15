@@ -1,4 +1,6 @@
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Product implements IProduct{
 
@@ -8,6 +10,7 @@ public class Product implements IProduct{
     private BigDecimal price;
     private BigDecimal stockAmount;
     private BigDecimal discount;
+    private List<IReview> reviews;
 
     public Product(String producer, String name, String description, BigDecimal price, BigDecimal stockAmount, BigDecimal discount) {
         this.producer = producer;
@@ -16,6 +19,7 @@ public class Product implements IProduct{
         this.price = price;
         this.stockAmount = stockAmount;
         setDiscount(discount);
+        this.reviews = new ArrayList<>();
     }
     public Product(String producer, String name, String description, BigDecimal price, BigDecimal stockAmount) {
         this.producer = producer;
@@ -82,5 +86,18 @@ public class Product implements IProduct{
         // we calculate discount factor (e.g. 1 - 0.1 = 0.9) and finally we apply it to discount price
         BigDecimal discountFactor = BigDecimal.ONE.subtract(discount.divide(BigDecimal.valueOf(100)));
         return price.multiply(discountFactor);
+    }
+
+    @Override
+    public void addReview(IReview review) {
+        if (review.getRating() < 0 || review.getRating() > 5) {
+            throw new IllegalArgumentException("Rating has to be between 0 and 5");
+        }
+        reviews.add(review);
+    }
+
+    @Override
+    public List<IReview> getReviews() {
+        return reviews;
     }
 }
