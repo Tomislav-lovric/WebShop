@@ -31,6 +31,7 @@ public class Wishlist implements IWishlist{
     public boolean addItem(IProduct product) {
         if (!items.contains(product)) {
             items.add(product);
+            return true;
         }
         return false;
     }

@@ -80,9 +80,9 @@ public class WebShop {
             IWishlist wishlist = new Wishlist(1L, "Tom");
 
             // Adding items to wishlist
-            wishlist.addItem(apple);
-            wishlist.addItem(orange);
-            wishlist.addItem(orange);
+            System.out.println("Adding to wishlist successful: " + wishlist.addItem(apple));
+            System.out.println("Adding to wishlist successful: " + wishlist.addItem(orange));
+            System.out.println("Adding to wishlist successful: " + wishlist.addItem(orange));
 
             // Displaying wishlist
             System.out.println("Wishlist:");
@@ -91,7 +91,8 @@ public class WebShop {
             }
 
             // Removing item from wishlist
-            wishlist.removeItem(orange);
+            System.out.println("Removing from wishlist successful: " + wishlist.removeItem(orange));
+            System.out.println("Removing from wishlist successful: " + wishlist.removeItem(orange));
 
             // Displaying wishlist
             System.out.println("Wishlist:");
