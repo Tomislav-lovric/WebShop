@@ -55,5 +55,11 @@ public class WebShop {
 
         // Displaying total price of our shopping cart after checkout
         System.out.println("Total price of shopping cart: " + shoppingCart.getTotalPrice());
+
+        // Displaying order history
+        for (IOrder order : shoppingCart.getOrderHistory()) {
+            System.out.println("Order ID: " + order.getId() + ", User: " + order.getUser() +
+                    ", Date: " + order.getOrderDate() + ", Total Price: " + order.getTotalPrice());
+        }
     }
 }

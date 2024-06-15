@@ -10,12 +10,14 @@ public class ShoppingCart implements IShoppingCart{
     private String user;
     private Date createdTime;
     private List<IShoppingItem> items;
+    private List<IOrder> orderHistory;
 
     public ShoppingCart(Long id, String user) {
         this.id = id;
         this.user = user;
         this.createdTime = new Date();
         this.items = new ArrayList<>();
+        this.orderHistory = new ArrayList<>();
     }
 
     @Override
@@ -155,8 +157,23 @@ public class ShoppingCart implements IShoppingCart{
             BigDecimal newStockAmount = item.getProduct().getStockAmount().subtract(item.getQuantity());
             item.getProduct().setStockAmount(newStockAmount);
         }
+        // Then we create our order and add it to the order history. We also have to use new ArrayList<>(items)
+        // because we are clearing the list later, and we have to create copy of the list
+        IOrder order = new Order(
+                (long) (orderHistory.size() + 1),
+                user,
+                new Date(),
+                new ArrayList<>(items),
+                getTotalPrice());
+
+        orderHistory.add(order);
         // And finally if it's all good we clear our shopping cart and return true
         items.clear();
         return true;
+    }
+
+    @Override
+    public List<IOrder> getOrderHistory() {
+        return orderHistory;
     }
 }
