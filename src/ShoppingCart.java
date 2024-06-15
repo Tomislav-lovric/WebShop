@@ -87,7 +87,7 @@ public class ShoppingCart implements IShoppingCart{
         // If item doesn't exist in our shopping cart, we check if quantity of items we are trying to add doesn't
         // exceed stock amount, if it doesn't we return true
         if (product.getStockAmount().compareTo(quantity) >= 0) {
-            items.add(new ShoppingItem((long) items.size() + 1, product, quantity, product.getPrice()));
+            items.add(new ShoppingItem((long) items.size() + 1, product, quantity, product.getDiscountedPrice()));
             return true;
         }
 
@@ -129,7 +129,8 @@ public class ShoppingCart implements IShoppingCart{
         for (IShoppingItem item : items) {
             // Here we simply get stock amount and actual price of product
             BigDecimal stockAmount = item.getProduct().getStockAmount();
-            BigDecimal productPrice = item.getProduct().getPrice();
+            BigDecimal productPrice = item.getProduct().getDiscountedPrice();
+            System.out.println(productPrice);
             // Then we check if quantity exceeds stock amount, and if it does we set it to stock amount
             if (item.getQuantity().compareTo(stockAmount) > 0) {
                 item.setQuantity(stockAmount);
@@ -138,8 +139,6 @@ public class ShoppingCart implements IShoppingCart{
             if (item.getPrice().compareTo(productPrice) != 0) {
                 item.setPrice(productPrice);
             }
-
-            return;
         }
     }
 

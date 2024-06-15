@@ -37,6 +37,12 @@ public interface IProduct {
     BigDecimal getStockAmount();
 
     void setStockAmount(BigDecimal stockAmount);
+
+    BigDecimal getDiscount();
+
+    void setDiscount(BigDecimal discount);
+
+    BigDecimal getDiscountedPrice();
 }
 
 

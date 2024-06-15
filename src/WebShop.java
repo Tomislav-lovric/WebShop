@@ -8,6 +8,7 @@ public class WebShop {
                 "apple",
                 "A big green apple",
                 BigDecimal.valueOf(1),
+                BigDecimal.valueOf(10),
                 BigDecimal.valueOf(10));
         IProduct orange = new Product(
                 "FreshFruit",
@@ -33,8 +34,14 @@ public class WebShop {
         // Displaying total price of our shopping cart after removing 5 oranges
         System.out.println("Total price of shopping cart: " + shoppingCart.getTotalPrice());
 
+        // Adding 10% discount to oranges
+        orange.setDiscount(BigDecimal.valueOf(10));
+
         // Refreshing our shopping cart
         shoppingCart.refresh();
+
+        // Displaying total price of our shopping cart after refreshing it
+        System.out.println("Total price of shopping cart: " + shoppingCart.getTotalPrice());
 
         // Printing all our items in our shopping cart
         for (IShoppingItem item : shoppingCart.getItems()) {
