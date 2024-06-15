@@ -73,6 +73,29 @@ public class WebShop {
                         ", Rating: " + review.getRating());
             }
 
+            // Creating wishlist
+            IWishlist wishlist = new Wishlist(1L, "Tom");
+
+            // Adding items to wishlist
+            wishlist.addItem(apple);
+            wishlist.addItem(orange);
+            wishlist.addItem(orange);
+
+            // Displaying wishlist
+            System.out.println("Wishlist:");
+            for (IProduct product : wishlist.getItems()) {
+                System.out.println(product.getName());
+            }
+
+            // Removing item from wishlist
+            wishlist.removeItem(orange);
+
+            // Displaying wishlist
+            System.out.println("Wishlist:");
+            for (IProduct product : wishlist.getItems()) {
+                System.out.println(product.getName());
+            }
+
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
