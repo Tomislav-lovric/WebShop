@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.math.BigDecimal;
 
 public class WebShop {
@@ -18,8 +19,11 @@ public class WebShop {
                     BigDecimal.valueOf(2),
                     BigDecimal.valueOf(20));
 
+            PromotionCodeReader promotionCodeReader = new PromotionCodeReader(
+                    "C:/Users/Tomo/Desktop/Java Stuff/Webshop/src/promotion_codes.csv");
+
             // Creating shopping cart
-            IShoppingCart shoppingCart = new ShoppingCart(1L, "Tom");
+            IShoppingCart shoppingCart = new ShoppingCart(1L, "Tom", promotionCodeReader);
 
             // Adding items into our shopping cart
             System.out.println("Adding of apple successful: " + shoppingCart.addItem(apple, BigDecimal.valueOf(1)));
@@ -28,6 +32,10 @@ public class WebShop {
 
             // Displaying total price of our shopping cart
             System.out.println("Total price of shopping cart: " + shoppingCart.getTotalPrice());
+
+            // Displaying total price of our shopping cart with added discount code
+            String promoCode = "DISCOUNT10";
+            System.out.println("Total price of shopping cart with discount code: " + shoppingCart.getTotalPriceWithPromotionCode(promoCode));
 
             // Removing items from our shopping cart
             System.out.println("Removing of orange successful: " + shoppingCart.removeItem(orange, BigDecimal.valueOf(5)));
@@ -102,6 +110,8 @@ public class WebShop {
 
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Error reading promotion code: " + e.getMessage());
         }
     }
 }

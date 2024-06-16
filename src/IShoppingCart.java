@@ -80,6 +80,8 @@ public interface IShoppingCart {
     boolean checkOut();
     
     List<IOrder> getOrderHistory();
+
+    BigDecimal getTotalPriceWithPromotionCode(String code);
 }
 
 

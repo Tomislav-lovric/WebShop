@@ -11,13 +11,15 @@ public class ShoppingCart implements IShoppingCart{
     private Date createdTime;
     private List<IShoppingItem> items;
     private List<IOrder> orderHistory;
+    private PromotionCodeReader promotionCodeReader;
 
-    public ShoppingCart(Long id, String user) {
+    public ShoppingCart(Long id, String user, PromotionCodeReader promotionCodeReader) {
         this.id = id;
         this.user = user;
         this.createdTime = new Date();
         this.items = new ArrayList<>();
         this.orderHistory = new ArrayList<>();
+        this.promotionCodeReader = promotionCodeReader;
     }
 
     @Override
@@ -175,5 +177,20 @@ public class ShoppingCart implements IShoppingCart{
     @Override
     public List<IOrder> getOrderHistory() {
         return orderHistory;
+    }
+
+    @Override
+    public BigDecimal getTotalPriceWithPromotionCode(String code) {
+        // Here we simply get total price
+        BigDecimal totalPrice = getTotalPrice();
+        if (promotionCodeReader.isCodeValid(code)) {
+            // Then after checking that code is valid we get our discount of that code
+            BigDecimal discount = promotionCodeReader.getDiscount(code);
+            // Then we calculate our discount factor and apply it to total price, which we then return
+            BigDecimal discountFactor = BigDecimal.ONE.subtract(discount.divide(BigDecimal.valueOf(100)));
+            return totalPrice.multiply(discountFactor);
+        }
+        // If code fails we just return regular total price without discount applied
+        return totalPrice;
     }
 }
